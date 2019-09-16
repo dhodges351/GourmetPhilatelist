@@ -38,6 +38,7 @@ export class AuthService {
   userProfile$ = this.userProfileSubject$.asObservable();
   // Create a local property for login status
   loggedIn: boolean = null;
+  isAdmin: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -106,7 +107,7 @@ export class AuthService {
     );
     // Subscribe to authentication completion observable
     // Response will be an array of user and login status
-    const authCompleteSub = authComplete$.subscribe(([user, loggedIn]) => {
+    const authCompleteSub = authComplete$.subscribe(([user, loggedIn]) => {      
       // Redirect to target route after callback processing
       this.router.navigate([targetRoute]);
       // Clean up subscription
@@ -117,6 +118,7 @@ export class AuthService {
   logout() {
     // Ensure Auth0 client instance exists
     this.auth0Client$.subscribe((client: Auth0Client) => {
+      localStorage.removeItem('Item 1');
       // Call method to log out
       client.logout({
         client_id: config.clientId,

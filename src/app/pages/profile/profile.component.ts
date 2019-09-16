@@ -10,20 +10,17 @@ export class ProfileComponent implements OnInit {
   profileJson: string = null;
   profile: any;
 
-  constructor(public auth: AuthService) { }
+  constructor(private auth: AuthService) {} 
 
-  ngOnInit() {
+  ngOnInit() {    
     this.auth.userProfile$.subscribe(
       profile => this.profileJson = JSON.stringify(profile, null, 2)
-    );
-    if (this.profileJson != '')
-    {
-      var test = JSON.parse(this.profileJson);
-      if (test)
-      {
-        //alert(test.name);
-      }
+    );  
+    var jObj = JSON.parse(this.profileJson);
+    if (jObj)
+    {        
+      let key = 'Item 1';
+      localStorage.setItem(key, jObj.name);   
     }
   }
-
 }

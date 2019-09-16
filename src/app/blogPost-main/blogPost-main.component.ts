@@ -7,7 +7,6 @@ import { BlogContent } from '../models/blogcontent';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BlogPostListComponent } from '../blogPost-list/blogPost-list.component';
 import { HomeComponent } from '../home/home.component';
-import { TransferService } from '../transfer.service';
 
 @Component({
   selector: 'app-blogPost-main',
@@ -24,10 +23,9 @@ export class BlogPostMainComponent implements OnInit {
   createdAt: string = '';
   blogs: Array<Blogpost>;
   filteredBlogs: Array<Blogpost>;
-  error: {}; 
-  newTabIndex: number;
+  error: {};
 
-  constructor(private transferService:TransferService, private router: Router, private route: ActivatedRoute, private apiService: ApiService, public dialog: MatDialog) 
+  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, public dialog: MatDialog) 
   {
   }
 

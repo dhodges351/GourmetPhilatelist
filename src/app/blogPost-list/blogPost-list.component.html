@@ -12,7 +12,8 @@
             <h2>{{blogPost.title}}</h2>
             <h3>{{blogPost.category}}</h3>
             <p>
-              {{blogPost.author}} - {{blogPost.createdAt | date: 'MM/dd/yyyy HH:mm:ss'}}
+              <!-- {{blogPost.author}} - {{blogPost.createdAt | date: 'MM/dd/yyyy HH:mm:ss'}} -->
+              {{blogPost.author}} - {{ blogPost.createdAt}}
               <br />
               {{blogPost.short_desc}}
             </p>

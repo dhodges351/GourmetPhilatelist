@@ -44,6 +44,7 @@
     "font-awesome": "^4.7.0",
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
+    "github-db": "^1.1.3",
     "hammerjs": "^2.0.8",
     "highlight.js": "^9.15.10",
     "http-errors": "^1.7.3",

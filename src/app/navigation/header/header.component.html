@@ -1,14 +1,15 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button (click)="onToggleSidenav()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <div class="box">
-      <a routerLink="/home">
+    <div style="margin-top:10px;" fxFlex fxLayout fxLayoutAlign="start">
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>      
+      &nbsp;
+      <a style="margin-top:5px;" routerLink="/home">
         <span style="font-family:cursive;">The Gourmet Philatelist</span>
-      </a>
+      </a>    
     </div>
-    <div fxFlex fxLayout fxLayoutAlign="center">
+    <div  style="margin-top:10px;" fxFlex fxLayout fxLayoutAlign="center">
       <ul class="imgUl" fxLayout fxLayoutGap="5px">
         <li>
           <img src="assets/images/greenguy.jpg" />
@@ -32,6 +33,8 @@
             <img src="assets/images/monalisa1.jpg" />
         </li> -->
       </ul>
+      <!-- <h1>THIS IS A TEST</h1> -->
+      <!-- <img style="margin-left:30px;" src="assets/images/stampsalltogether.png" alt="stamps" /> -->
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end">
         <ul class="imgUl" fxLayout fxLayoutGap="5px">
