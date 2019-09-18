@@ -20,21 +20,21 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'blogPosts', component: BlogPostListComponent, data: { title: 'Blog Posts' } },
   { path: 'contact', component: ContactUsComponent, data: { title: 'Contact Us' } }, 
-  { path: 'content', component: BlogContentComponent, data: { title: 'Blog Content' }, canActivate: [ AuthGuard ] },
-  { path: 'allBlogContent', component: BlogContentListComponent, data: { title: 'All Blog Content' }, canActivate: [ AuthGuard ]  }, 
+  { path: 'content', component: BlogContentComponent, data: { title: 'Blog Content' }, },
+  { path: 'allBlogContent', component: BlogContentListComponent, data: { title: 'All Blog Content' }, }, 
   { path: 'contentEdit/:id', component: BlogContentEditComponent, data: { title: 'Edit Blog Content' } },  
   { path: 'about', component: AboutComponent, data: { title: 'About' } }, 
-  { path: 'login', component: LoginComponent, data: { title: 'Login' } }, 
-  {
-    path: 'callback',
-    component: CallbackComponent
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
-  },
-  { path: 'registration', component: RegistrationComponentComponent, data: { title: 'Register' } }, 
+  // { path: 'login', component: LoginComponent, data: { title: 'Login' } }, 
+  // {
+  //   path: 'callback',
+  //   component: CallbackComponent
+  // },
+  // {
+  //   path: 'profile',
+  //   component: ProfileComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // { path: 'registration', component: RegistrationComponentComponent, data: { title: 'Register' } }, 
   { path: '**', component: PageNotFoundComponent},];
 
 @NgModule({

@@ -26,6 +26,6 @@ export class HomeComponent implements OnInit {
     if (event.index == 1)
     {
       BlogPostListComponent.blogPostListApp.swapWhatIsOpen('list');
-    }    
+    }       
   }
 }
