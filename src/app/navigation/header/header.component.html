@@ -36,6 +36,23 @@
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end">
       <ul class="imgUl" fxLayout fxLayoutGap="5px">
+      <li *ngIf="auth.loggedIn === false">
+        <button class="btn btn-primary btn-margin" id="qsLoginBtn" (click)="auth.login()">
+          Log in
+        </button>
+      </li>
+      <li *ngIf="auth.loggedIn === true">
+        <div style="margin-top:5px;">{{this.currentUserName }}</div>
+      </li>
+      &nbsp;<li *ngIf="auth.loggedIn === true">
+        <button class="btn btn-primary btn-margin" id="qsLoginBtn" (click)="auth.logout()">
+          Log Out
+        </button>
+      </li>
+    </ul>
+  </div>
+    <!-- <div fxFlex fxLayout fxLayoutAlign="end">
+      <ul class="imgUl" fxLayout fxLayoutGap="5px">
         <li>
           <div style="margin-top:5px;font-family:cursive;" id="WelcomeMessage"></div>
         </li>
@@ -48,6 +65,6 @@
           </button>
         </li>
       </ul>
-    </div>  
+    </div>   -->
   </mat-toolbar-row>
 </mat-toolbar>

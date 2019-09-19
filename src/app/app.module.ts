@@ -29,6 +29,7 @@ import { BlogContentEditComponent } from './blog-content-edit/blog-content-edit.
 import { ModalCommentComponent } from './modal/modal-comment.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DataService } from './data.service';
+import { StateService } from './state.service';
 import { BlogGalleryComponent } from './blog-gallery/blog-gallery.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -98,7 +99,7 @@ export function hljsLanguages() {
       languages: hljsLanguages
     }),
   ],
-  providers: [DataService],  
+  providers: [DataService, StateService],  
   entryComponents: [ModalComponent, ModalCommentComponent],
   bootstrap: [AppComponent],
 })

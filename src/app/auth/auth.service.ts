@@ -5,12 +5,13 @@ import * as config from 'auth_config.json';
 import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { StateService } from '../state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService { 
-
+ 
    // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
     createAuth0Client({
@@ -40,7 +41,7 @@ export class AuthService {
   loggedIn: boolean = null;
   isAdmin: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public stateSvc: StateService) { }
 
   // When calling, options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
@@ -108,8 +109,14 @@ export class AuthService {
     // Subscribe to authentication completion observable
     // Response will be an array of user and login status
     const authCompleteSub = authComplete$.subscribe(([user, loggedIn]) => {      
-      // Redirect to target route after callback processing
+      // Redirect to target route after callback processing       
+
+      localStorage.setItem('Item 1', user.name);  
+
+      this.stateSvc.setCurrentUserName(user.name);    
+
       this.router.navigate([targetRoute]);
+         
       // Clean up subscription
       authCompleteSub.unsubscribe();
     });

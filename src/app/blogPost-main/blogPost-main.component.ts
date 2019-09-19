@@ -23,11 +23,11 @@ export class BlogPostMainComponent implements OnInit {
   createdAt: string = '';
   blogs: Array<Blogpost>;
   filteredBlogs: Array<Blogpost>;
-  error: {};
+  error: {};    
 
   constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, public dialog: MatDialog) 
   {
-  }
+  }  
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalComponent, {
@@ -60,6 +60,6 @@ export class BlogPostMainComponent implements OnInit {
         }       
       }, err => {
         console.log(err);
-    });
+    });    
   }  
 }

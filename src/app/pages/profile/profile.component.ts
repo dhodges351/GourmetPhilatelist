@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,17 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ProfileComponent implements OnInit {
+  profileJson: string = null;
   userName: string = '';
-   userEmail: string = '';  
+  userEmail: string = '';  
   
-  constructor() 
+  constructor(public auth: AuthService, private router: Router) 
   {    
   } 
 
   ngOnInit() 
   { 
-    this.userName = localStorage.getItem('userName');
-    this.userEmail = localStorage.getItem('userEmail');
-  } 
-  
+    this.auth.userProfile$.subscribe(
+      profile => this.profileJson = JSON.stringify(profile, null, 2)
+    );
+    
+    var jObj = JSON.parse(this.profileJson);
+    if (jObj)
+    {
+      this.userName = jObj.name;
+      this.userEmail = jObj.email;
+    }    
+  }   
 }
