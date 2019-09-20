@@ -9,10 +9,8 @@
     "ng": "ng",
     "client": "ng serve --proxy-config server.conf.json",
     "server": "nodemon ./bin/www",
-    "start": "npm-run-all -p client server",    
-    "build": "babel-node tools/build.js && npm run open:dist",
-    "heroku-prebuild": "",
-    "heroku-postbuild": "babel-node tools/build.js",
+    "start": "npm-run-all -p client server",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
