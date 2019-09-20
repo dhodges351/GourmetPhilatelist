@@ -1,10 +1,17 @@
 export class Blogpost {
-    _id: string;
-    category: string;
-    title: string;
-    short_desc: string;
-    author: string;
-    image: string;
-    createdAt: Date;
-    updatedAt: Date;
+    constructor(){    
+        this.category = '';
+        this.title = '';
+        this.short_desc = '';
+        this.author = '';
+        this.image = '';
+      }      
+      public   category: string;
+      public   title: string;
+      public   short_desc: string;
+      public   author: string;
+      public   image: string;
+      public   createdAt: Date;
+      public   updatedAt: Date; 
 }
+
