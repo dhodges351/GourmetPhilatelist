@@ -1,3 +1,4 @@
+require('dotenv').config();
 const createError = require('http-errors'); 
 const favicon = require('serve-favicon'); 
 const logger = require('morgan');
@@ -14,7 +15,7 @@ const apiContactRouter = require('./routes/contact.routes.js');
 const apiContentRouter = require('./routes/blogContent.routes.js');
 const apiCommentRouter = require('./routes/comment.routes.js');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/blogDb',
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blogDb',
 { 
     promiseLibrary: require('bluebird'),
     useNewUrlParser: true
