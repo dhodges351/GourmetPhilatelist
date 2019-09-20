@@ -14,7 +14,7 @@ export class SidenavListComponent implements OnInit {
   }
 
   ngOnInit() {
-    let loggedInName = localStorage.getItem('userName');
+    let loggedInName = localStorage.getItem('Item 1');
     if (loggedInName == 'Bob Hodges' || loggedInName == 'Debra Hodges')
     {        
       this.isAdmin = true; 
