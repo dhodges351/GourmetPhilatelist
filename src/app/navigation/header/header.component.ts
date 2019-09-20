@@ -9,6 +9,7 @@ import { StateService } from '../../state.service';
 })
 export class HeaderComponent implements OnInit {
   currentUserName:string = '';
+  
   constructor(public auth: AuthService, public stateSvc: StateService) {
   }
 
