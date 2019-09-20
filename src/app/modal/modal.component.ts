@@ -5,7 +5,7 @@ import { ApiService } from '../api.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { FileUploader} from 'ng2-file-upload';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Blogpost } from '../models/Blogpost';
+import { Blogpost } from "../models/blogpost";
 
 const URL = '/api/upload';
 

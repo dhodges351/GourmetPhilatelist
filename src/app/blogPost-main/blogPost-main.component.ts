@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Blogpost } from '../models/blogpost';
+import { Blogpost } from "../models/blogpost";
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from '../modal/modal.component';
 import { BlogContent } from '../models/blogcontent';

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Blogpost } from '../models/blogpost';
+import { Blogpost } from "../models/blogpost";
 import { Comment } from '../models/comment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
