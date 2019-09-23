@@ -15,6 +15,7 @@ const apiContactRouter = require('./routes/contact.routes.js');
 const apiContentRouter = require('./routes/blogContent.routes.js');
 const apiCommentRouter = require('./routes/comment.routes.js');
 const mongoose = require('mongoose');
+process.env.MONGODB_URI = 'mongodb://heroku_fhp3w022:9as2leh84js8631n2171ld2q4u@ds127436.mlab.com:27436/heroku_fhp3w022';
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blogDb',
 { 
     promiseLibrary: require('bluebird'),
