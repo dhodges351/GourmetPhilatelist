@@ -7,7 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "client": "ng serve --proxy-config server.conf.json",
+    "client": "ng serve",
     "server": "nodemon ./bin/www",
     "start": "npm-run-all -p client server",
     "build": "ng build --prod",
@@ -94,7 +94,7 @@
     "typescript": "3.5.3"
   },
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "bin": {
     "ng-dh-nav": "www.js"
   },

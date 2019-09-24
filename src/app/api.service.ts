@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, enableProdMode } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map, filter } from 'rxjs/operators';
@@ -7,22 +7,33 @@ import { BlogContent } from './models/blogcontent';
 import { Comment } from './models/comment';
 import { all } from 'q';
 import { User } from './models/user';
+import { environment } from './../environments/environment';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({'Content-Type': 'application/json', })
 };
-const apiUrl = "/api";
-const loginUrl = apiUrl + '/login';
-const blogContentUrl = apiUrl + '/blogContent';
-const commentUrl = apiUrl + '/comment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiService {
+  apiUrl:string = "";
+  loginUrl:string = "";
+  blogContentUrl:string = "";
+  commentUrl = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {    
+    console.log(environment.production); // Logs false for default 
+    if (environment.production) {
+      enableProdMode();
+    }
+    this.apiUrl = environment.apiUrl;
+    console.log(this.apiUrl);
+    this.loginUrl = this.apiUrl + '/login';
+    this.blogContentUrl = this.apiUrl + '/blogContent';
+    this.commentUrl = this.apiUrl + '/comment';
+   }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -40,7 +51,7 @@ export class ApiService {
   };
 
   login(email:string, password:string): Observable<any> {
-    return this.http.post<User>(loginUrl, {email, password}, httpOptions)
+    return this.http.post<User>(this.loginUrl, {email, password}, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -52,34 +63,34 @@ export class ApiService {
   }  
 
   getBlogPosts(): Observable<any> {
-    return this.http.get(apiUrl, httpOptions).pipe(
+    return this.http.get(this.apiUrl, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
   getBlogPost(id: string): Observable<any> {
-    const url = `${apiUrl}/${id}`;
+    const url = `${this.apiUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
   
   postBlogPost(data): Observable<any> {
-    return this.http.post(apiUrl, data, httpOptions)
+    return this.http.post(this.apiUrl, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
   
   updateBlogPost(id: string, data): Observable<any> {    
-    return this.http.put(apiUrl + '/' + id, data, httpOptions)
+    return this.http.put(this.apiUrl + '/' + id, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
   
   deleteBlogPost(id: string): Observable<{}> {
-    const url = `${apiUrl}/${id}`;
+    const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -87,7 +98,7 @@ export class ApiService {
   }
 
   saveContact(contact: Contact): Observable<any>{
-    return this.http.post(apiUrl + '/contact',  
+    return this.http.post(this.apiUrl + '/contact',  
     {
       firstname: contact.firstname,
       lastname: contact.lastname,
@@ -102,7 +113,7 @@ export class ApiService {
   } 
 
   saveBlogContent(data): Observable<any>{
-    return this.http.post(apiUrl + '/blogContent', data, 
+    return this.http.post(this.apiUrl + '/blogContent', data, 
     httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -110,20 +121,20 @@ export class ApiService {
   }  
 
   getAllBlogContent(): Observable<any> {
-    return this.http.get(apiUrl + '/blogContent', httpOptions).pipe(
+    return this.http.get(this.apiUrl + '/blogContent', httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
   updateBlogContent(id: string, data): Observable<any> {
-    return this.http.put(apiUrl + '/blogContent/' + id, data, httpOptions)
+    return this.http.put(this.apiUrl + '/blogContent/' + id, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
   
   deleteBlogContent(id: string): Observable<{}> {   
-    const url = `${blogContentUrl}/${id}`;
+    const url = `${this.blogContentUrl}/${id}`;
     return this.http.delete(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -131,14 +142,14 @@ export class ApiService {
   }
 
   getBlogContentDetails(id: string): Observable<any> {   
-    const url = `${blogContentUrl}/${id}`;
+    const url = `${this.blogContentUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
   saveComment(data): Observable<any>{
-    return this.http.post(commentUrl, data, 
+    return this.http.post(this.commentUrl, data, 
     httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -146,21 +157,21 @@ export class ApiService {
   }
 
   getCommentDetails(id: string): Observable<any> {   
-    const url = `${commentUrl}/${id}`;
+    const url = `${this.commentUrl}/${id}`;
     return this.http.get(url, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
 
   updateComment(id: string, data): Observable<any> {
-    return this.http.put(commentUrl + '/' + id, data, httpOptions)
+    return this.http.put(this.commentUrl + '/' + id, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
   
   deleteComment(id: string): Observable<{}> {   
-    const url = `${commentUrl}/${id}`;
+    const url = `${this.commentUrl}/${id}`;
     return this.http.delete(url, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -168,7 +179,7 @@ export class ApiService {
   }
 
   getComments(): Observable<any> {
-    return this.http.get(commentUrl, httpOptions).pipe(
+    return this.http.get(this.commentUrl, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
