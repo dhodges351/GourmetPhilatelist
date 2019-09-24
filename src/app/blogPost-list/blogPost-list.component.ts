@@ -88,13 +88,13 @@ export class BlogPostListComponent implements OnInit {
     this.loggedInUser = localStorage.getItem('Item 1');
     this.displayedPostColumns = ['image', 'title', 'category', 'author', 'createdAt', 'edit'];
 
-    this.getBlogPost(this.id);
+    //this.getBlogPost(this.id);
     this.blogPostForm = this.formBuilder.group({
-      'image': [null, !Validators.required],
-      'title': [null, Validators.required],
-      'category': [null, Validators.required],
-      'short_desc': [null, Validators.required],
-      'author': [null, Validators.required],
+      'image': ['', !Validators.required],
+      'title': ['', Validators.required],
+      'category': ['', Validators.required],
+      'short_desc': ['', Validators.required],
+      'author': ['', Validators.required],
     });
 
     // this.blogPosts = this.blogPostListJson;

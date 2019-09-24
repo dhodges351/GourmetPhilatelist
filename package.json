@@ -10,7 +10,7 @@
     "client": "ng serve --proxy-config server.conf.json",
     "server": "nodemon ./bin/www",
     "start": "npm-run-all -p client server",
-    "build": "ng build",
+    "build": "ng build –env=prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

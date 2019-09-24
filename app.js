@@ -34,7 +34,7 @@ const mongoose = require('mongoose');
 // });
 
 process.env.MONGODB_URI = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blogDb',
+// mongoose.connect('mongodb://localhost/blogDb',
 // { 
 //     promiseLibrary: require('bluebird'),
 //     useNewUrlParser: true
@@ -47,13 +47,14 @@ mongoose.connect(process.env.MONGODB_URI,
     promiseLibrary: require('bluebird'),
     useNewUrlParser: true
 }) 
-.then(() => console.log('connection successful')) 
+.then(() => console.log('connection successful ' + process.env.MONGODB_URI)) 
 .catch((err) => console.error(err));
 
  
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Origin', 'https://gourmetphilatelist.herokuapp.com'); 
   res.setHeader('Access-Control-Allow-Methods', 'POST');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);

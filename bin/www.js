@@ -1,12 +1,22 @@
 #!/usr/bin/env node
 
 /** * Module dependencies. */ 
+
+var express = require('express');
+var path = require('path');
 var app = require('../app'); 
+
 var debug = require('debug')('ng-dh-nav:server'); 
 var http = require('http');
 
 var port = '3000'; 
 app.set('port', port);
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 /** * Create HTTP server. */ 
 var server = http.createServer(app);
