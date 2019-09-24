@@ -24,10 +24,7 @@ export class ApiService {
   commentUrl = "";
 
   constructor(private http: HttpClient) {    
-    console.log(environment.production); // Logs false for default 
-    if (environment.production) {
-      enableProdMode();
-    }
+    console.log(environment.production); // Logs false for default     
     this.apiUrl = environment.apiUrl;
     console.log(this.apiUrl);
     this.loginUrl = this.apiUrl + '/login';
