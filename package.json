@@ -94,7 +94,7 @@
     "typescript": "3.5.3"
   },
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "bin": {
     "ng-dh-nav": "www.js"
   },
