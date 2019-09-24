@@ -16,27 +16,24 @@ const apiContentRouter = require('./routes/blogContent.routes.js');
 const apiCommentRouter = require('./routes/comment.routes.js');
 const mongoose = require('mongoose');
 
-var mongodb = require('mongodb');
-var MongoClient = mongodb.MongoClient;
-var url = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
+// var mongodb = require('mongodb');
+// var MongoClient = mongodb.MongoClient;
+// var url = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
 
-MongoClient.connect(url, function (err, db, useNewUrlParser=true) {
-  if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-    console.log('Connection established to', url);
+// MongoClient.connect(url, function (err, db, useNewUrlParser=true) {
+//   if (err) {
+//     console.log('Unable to connect to the mongoDB server. Error:', err);
+//   } else {
+//     console.log('Connection established to', url);
 
-    // do some work here with the database.
+//     // do some work here with the database.
 
-    //Close connection
-    db.close();
-  }
-});
+//     //Close connection
+//     db.close();
+//   }
+// });
 
-// process.env.DB_USER = 'dhodges351';
-// process.env.DB_PASSWORD = 'Sbpkjabb@1';
-// process.env.DB_NAME = 'heroku_fhp3w022';
-// process.env.MONGODB_URI = 'mongodb:\/\/dhodges351\:Sbpkjabb@1@ds127436.mlab.com:27436\/heroku_fhp3w022';
+process.env.MONGODB_URI = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blogDb',
 // { 
 //     promiseLibrary: require('bluebird'),
@@ -44,8 +41,18 @@ MongoClient.connect(url, function (err, db, useNewUrlParser=true) {
 // }) 
 // .then(() => console.log('connection successful')) 
 // .catch((err) => console.error(err));
+
+mongoose.connect(process.env.MONGODB_URI,
+{ 
+    promiseLibrary: require('bluebird'),
+    useNewUrlParser: true
+}) 
+.then(() => console.log('connection successful')) 
+.catch((err) => console.error(err));
+
  
 app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
   res.setHeader('Access-Control-Allow-Methods', 'POST');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
