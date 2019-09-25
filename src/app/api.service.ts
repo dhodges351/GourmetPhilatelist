@@ -3,9 +3,6 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map, filter } from 'rxjs/operators';
 import { Contact } from './models/contact.model';
-import { BlogContent } from './models/blogcontent';
-import { Comment } from './models/comment';
-import { all } from 'q';
 import { User } from './models/user';
 import { environment } from './../environments/environment';
 

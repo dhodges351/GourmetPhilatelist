@@ -8,12 +8,13 @@
   "scripts": {
     "ng": "ng",
     "client": "ng serve",
-    "server": "nodemon ./bin/www",
+    "server": "nodemon node app.js",
     "start": "npm-run-all -p client server",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --output-path dist"
   },
   "private": true,
   "dependencies": {
@@ -94,10 +95,7 @@
     "typescript": "3.5.3"
   },
   "description": "",
-  "main": "app.js",
-  "bin": {
-    "ng-dh-nav": "www.js"
-  },
+  "main": "app.js",  
   "keywords": [],
   "author": "dhodges",
   "license": "ISC"

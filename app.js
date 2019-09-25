@@ -15,25 +15,19 @@ const apiContactRouter = require('./routes/contact.routes.js');
 const apiContentRouter = require('./routes/blogContent.routes.js');
 const apiCommentRouter = require('./routes/comment.routes.js');
 const mongoose = require('mongoose');
-
-// var mongodb = require('mongodb');
-// var MongoClient = mongodb.MongoClient;
-// var url = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
-
-// MongoClient.connect(url, function (err, db, useNewUrlParser=true) {
-//   if (err) {
-//     console.log('Unable to connect to the mongoDB server. Error:', err);
-//   } else {
-//     console.log('Connection established to', url);
-
-//     // do some work here with the database.
-
-//     //Close connection
-//     db.close();
-//   }
-// });
-
 process.env.MONGODB_URI = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
+var http = require('http');
+var debug = require('debug')('ng-dh-nav:server'); 
+var port = '3000'; 
+app.set('port', port);
+
+/** * Create HTTP server. */ 
+var server = http.createServer(app);
+
+/** * Listen on provided port, on all network interfaces. */ 
+server.listen(port); server.on('error', onError); 
+server.on('listening', onListening);
+
 // mongoose.connect('mongodb://localhost/blogDb',
 // { 
 //     promiseLibrary: require('bluebird'),
@@ -65,8 +59,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev')); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
-app.use(express.static(path.join(__dirname, 'dist/ng-dh-nav'))); 
-app.use('/', express.static(path.join(__dirname, 'dist/ng-dh-nav')));
 app.use('/api/comment', apiCommentRouter);
 app.use('/api/contact', apiContactRouter);
 app.use('/api/blogContent', apiContentRouter);
@@ -122,3 +114,41 @@ app.use(function(err, req, res, next)
 });
 
 module.exports = app;
+
+
+/** * Event listener for HTTP server "error" event. */ 
+function onError(error) 
+{ 
+    if (error.syscall !== 'listen') 
+    { 
+        throw error; 
+    } 
+    var bind = typeof port === 'string' 
+        ? 'Pipe ' + port 
+        : 'Port ' + port; 
+        
+    // handle specific listen errors with friendly messages 
+    switch (error.code) 
+    { 
+        case 'EACCES': console.error(bind 
+            + ' requires elevated privileges'); 
+            process.exit(1); 
+            break; 
+        case 'EADDRINUSE': console.error(bind 
+            + ' is already in use'); 
+            process.exit(1); 
+            break; 
+        default: 
+        throw error; 
+    } 
+} 
+
+/** * Event listener for HTTP server "listening" event. */ 
+function onListening() 
+{ 
+    var addr = server.address(); 
+    var bind = typeof addr === 'string' 
+        ? 'pipe ' + addr 
+        : 'port ' + addr.port; 
+        debug('Listening on ' + bind); 
+}
