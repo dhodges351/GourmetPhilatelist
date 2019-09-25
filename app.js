@@ -52,6 +52,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev')); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
+app.use(express.static(path.join(__dirname, 'dist/ng-dh-nav'))); 
+app.use('/', express.static(path.join(__dirname, 'dist/ng-dh-nav')));
 app.use('/api/comment', apiCommentRouter);
 app.use('/api/contact', apiContactRouter);
 app.use('/api/blogContent', apiContentRouter);
