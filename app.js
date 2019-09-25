@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors')
 const createError = require('http-errors'); 
 const favicon = require('serve-favicon'); 
 const logger = require('morgan');
@@ -7,6 +8,7 @@ const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser')
+process.env.MONGODB_URI = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
 const app = express();
 const router = express.Router();
 const DIR = 'assets/images/';
@@ -15,7 +17,6 @@ const apiContactRouter = require('./routes/contact.routes.js');
 const apiContentRouter = require('./routes/blogContent.routes.js');
 const apiCommentRouter = require('./routes/comment.routes.js');
 const mongoose = require('mongoose');
-process.env.MONGODB_URI = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
 var http = require('http');
 var debug = require('debug')('ng-dh-nav:server'); 
 var port = '3000'; 
@@ -42,27 +43,10 @@ mongoose.connect(process.env.MONGODB_URI,
     useNewUrlParser: true
 }) 
 .then(() => console.log('connection successful ' + process.env.MONGODB_URI)) 
-.catch((err) => console.error(err));
- 
-// var allowCrossDomain = function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-//   res.header('Access-Control-Allow-Headers', 'Authorization, Content-Length, X-Requested-With');
+.catch((err) => console.error(err)); 
 
-//   // intercept OPTIONS method
-//   if ('OPTIONS' == req.method) {
-//     res.send(200);
-//   }
-//   else {
-//     next();
-//   }
-// };
-
-//app.use(allowCrossDomain) 
-
-var cors = require('cors')
-app.use(cors());
-
+app.use(cors({credentials: true, origin: true}))
+app.options('*', cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev')); 
