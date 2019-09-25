@@ -10,7 +10,7 @@
     "client": "ng serve",
     "server": "nodemon node app.js",
     "start": "npm-run-all -p client server",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

@@ -1,5 +1,3 @@
-require('dotenv').config();
-const cors = require('cors')
 const createError = require('http-errors'); 
 const favicon = require('serve-favicon'); 
 const logger = require('morgan');
@@ -8,52 +6,37 @@ const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser')
-process.env.MONGODB_URI = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
 const app = express();
 const router = express.Router();
-const DIR = 'assets/images/';
+const DIR = './uploads';
 const apiRouter = require('./routes/blogPost.routes.js');
 const apiContactRouter = require('./routes/contact.routes.js');
 const apiContentRouter = require('./routes/blogContent.routes.js');
 const apiCommentRouter = require('./routes/comment.routes.js');
-const mongoose = require('mongoose');
-var http = require('http');
-var debug = require('debug')('ng-dh-nav:server'); 
-var port = '3000'; 
-app.set('port', port);
+const mongoose = require('mongoose'); 
 
-/** * Create HTTP server. */ 
-var server = http.createServer(app);
-
-/** * Listen on provided port, on all network interfaces. */ 
-server.listen(port); server.on('error', onError); 
-server.on('listening', onListening);
-
-// mongoose.connect('mongodb://localhost/blogDb',
-// { 
-//     promiseLibrary: require('bluebird'),
-//     useNewUrlParser: true
-// }) 
-// .then(() => console.log('connection successful')) 
-// .catch((err) => console.error(err));
-
-mongoose.connect(process.env.MONGODB_URI,
+mongoose.connect('mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022',
 { 
     promiseLibrary: require('bluebird'),
     useNewUrlParser: true
 }) 
-.then(() => console.log('connection successful ' + process.env.MONGODB_URI)) 
-.catch((err) => console.error(err)); 
-
-app.use(cors({credentials: true, origin: true}))
-app.options('*', cors());
+.then(() => console.log('connection successful')) 
+.catch((err) => console.error(err));
+ 
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev')); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
-app.use(express.static(path.join(__dirname, 'dist/ng-dh-nav'))); 
-app.use('/', express.static(path.join(__dirname, 'dist/ng-dh-nav')));
+app.use(express.static(path.join(__dirname, 'dist'))); 
+app.use('/', express.static(path.join(__dirname, 'dist')));
 app.use('/api/comment', apiCommentRouter);
 app.use('/api/contact', apiContactRouter);
 app.use('/api/blogContent', apiContentRouter);
@@ -105,45 +88,7 @@ app.use(function(err, req, res, next)
         
     // render the error page 
     res.status(err.status || 500); 
-    res.sendStatus(err.status); 
-});
+    res.send(err.status); 
+}); 
 
 module.exports = app;
-
-
-/** * Event listener for HTTP server "error" event. */ 
-function onError(error) 
-{ 
-    if (error.syscall !== 'listen') 
-    { 
-        throw error; 
-    } 
-    var bind = typeof port === 'string' 
-        ? 'Pipe ' + port 
-        : 'Port ' + port; 
-        
-    // handle specific listen errors with friendly messages 
-    switch (error.code) 
-    { 
-        case 'EACCES': console.error(bind 
-            + ' requires elevated privileges'); 
-            process.exit(1); 
-            break; 
-        case 'EADDRINUSE': console.error(bind 
-            + ' is already in use'); 
-            process.exit(1); 
-            break; 
-        default: 
-        throw error; 
-    } 
-} 
-
-/** * Event listener for HTTP server "listening" event. */ 
-function onListening() 
-{ 
-    var addr = server.address(); 
-    var bind = typeof addr === 'string' 
-        ? 'pipe ' + addr 
-        : 'port ' + addr.port; 
-        debug('Listening on ' + bind); 
-}
