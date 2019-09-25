@@ -1,7 +1,8 @@
 {
   "/api": {
-  "target": "http://localhost:3000",
-  "secure": false,
+  "target": "http://ds127436.mlab.com:27436/heroku_fhp3w022/api",
+  "secure" : false,
+  "logLevel" : "debug",
   "changeOrigin": true
   }
 }

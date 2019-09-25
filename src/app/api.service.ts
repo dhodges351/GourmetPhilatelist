@@ -4,12 +4,13 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, tap, map, filter } from 'rxjs/operators';
 import { Contact } from './models/contact.model';
 import { User } from './models/user';
+import { environment } from './../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-//const apiUrl = "https://gourmetphilatelist.herokuapp.com/api";
-const apiUrl = "/api";
+
+const apiUrl = environment.apiUrl;
 const loginUrl = apiUrl + '/login';
 const blogContentUrl = apiUrl + '/blogContent';
 const commentUrl = apiUrl + '/comment';

@@ -16,30 +16,18 @@ const apiCommentRouter = require('./routes/comment.routes.js');
 const mongoose = require('mongoose'); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-var debug = require('debug')('ng-dh-nav:server'); 
-var http = require('http');
-var port = '3000'; 
-app.set('port', port);
-
-/** * Create HTTP server. */ 
-var server = http.createServer(app);
-
-/** * Listen on provided port, on all network interfaces. */ 
-server.listen(port); server.on('error', onError); 
-server.on('listening', onListening);
-
-mongoose.connect('mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022',
+const url = 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022';
+mongoose.connect(url,
 { 
     promiseLibrary: require('bluebird'),
     useNewUrlParser: true
 }) 
-.then(() => console.log('connection successful')) 
+.then(() => console.log('connection successful ' + url)) 
 .catch((err) => console.error(err));
  
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  //res.setHeader('Access-Control-Allow-Origin', 'https://gourmetphilatelist.herokuapp.com');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200'); 
+  //res.setHeader('Access-Control-Allow-Origin', 'http://ds127436.mlab.com:27436/heroku_fhp3w022');
   res.setHeader('Access-Control-Allow-Methods', 'POST');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -103,44 +91,10 @@ app.use(function(err, req, res, next)
         
     // render the error page 
     res.status(err.status || 500); 
-    res.send(err.status); 
+    res.sendStatus(status)
 }); 
 
+const port = process.env.PORT || 3000;
+app.listen(port);
+
 module.exports = app;
-
-/** * Event listener for HTTP server "error" event. */ 
-function onError(error) 
-{ 
-    if (error.syscall !== 'listen') 
-    { 
-        throw error; 
-    } 
-    var bind = typeof port === 'string' 
-        ? 'Pipe ' + port 
-        : 'Port ' + port; 
-        
-    // handle specific listen errors with friendly messages 
-    switch (error.code) 
-    { 
-        case 'EACCES': console.error(bind 
-            + ' requires elevated privileges'); 
-            process.exit(1); 
-            break; 
-        case 'EADDRINUSE': console.error(bind 
-            + ' is already in use'); 
-            process.exit(1); 
-            break; 
-        default: 
-        throw error; 
-    } 
-} 
-
-/** * Event listener for HTTP server "listening" event. */ 
-function onListening() 
-{ 
-    var addr = server.address(); 
-    var bind = typeof addr === 'string' 
-        ? 'pipe ' + addr 
-        : 'port ' + addr.port; 
-        debug('Listening on ' + bind); 
-}

@@ -7,10 +7,10 @@
   },
   "scripts": {
     "ng": "ng",
-    "client": "ng serve --proxy-config server.conf.json",
+    "client": "ng serve",
     "server": "node app.js",
     "start": "npm-run-all -p client server",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
