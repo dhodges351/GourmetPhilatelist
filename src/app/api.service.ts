@@ -8,6 +8,7 @@ import { User } from './models/user';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
+//const apiUrl = "https://gourmetphilatelist.herokuapp.com/api";
 const apiUrl = "/api";
 const loginUrl = apiUrl + '/login';
 const blogContentUrl = apiUrl + '/blogContent';
