@@ -6,8 +6,14 @@ import { Contact } from './models/contact.model';
 import { User } from './models/user';
 import { environment } from './../environments/environment';
 
+let allHeaders = new HttpHeaders().set("X-CustomHeader", "custom header value")
+  .append('Content-Type', 'application/fhir+json')
+  .append("'Access-Control-Allow-Origin", "*")
+  .append("Accept", "application/fhir+json")
+  .append("USER_KEY", "QIF83Fjoe4sYxdQsah3h"); 
+
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json', })
+  headers: allHeaders
 };
 
 @Injectable({
