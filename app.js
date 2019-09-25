@@ -24,7 +24,7 @@ mongoose.connect('mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/hero
 .catch((err) => console.error(err));
  
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'mongodb://dhodges351:Sbpkjabb%401@ds127436.mlab.com:27436/heroku_fhp3w022');
+  res.setHeader('Access-Control-Allow-Origin', 'https://gourmetphilatelist.herokuapp.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
